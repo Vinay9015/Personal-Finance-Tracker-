@@ -1,4 +1,4 @@
-# Personal-Finance-Tracker-
+# Personal-Finance-Tracker
 A command-line app to track income, expenses, and generate basic reports. 
 ### Key Features:
 * Add/remove transactions
