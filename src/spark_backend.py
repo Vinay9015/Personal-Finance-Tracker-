@@ -24,10 +24,11 @@ class SparkBackend:
 
     def _init_spark(self):
         """Initialize or get Spark session"""
-        # Set Java options to work with Java 17+ (fixes Security Manager issues in Java 23)
         import os
-        java_opts = [
-            "-Djdk.security.manager.allow=true",
+
+        # Java options for Java 17+ compatibility (especially Java 23)
+        # These --add-opens options allow Spark to access internal JDK APIs
+        java_opts = " ".join([
             "--add-opens=java.base/java.lang=ALL-UNNAMED",
             "--add-opens=java.base/java.lang.invoke=ALL-UNNAMED",
             "--add-opens=java.base/java.lang.reflect=ALL-UNNAMED",
@@ -37,22 +38,27 @@ class SparkBackend:
             "--add-opens=java.base/java.util=ALL-UNNAMED",
             "--add-opens=java.base/java.util.concurrent=ALL-UNNAMED",
             "--add-opens=java.base/java.util.concurrent.atomic=ALL-UNNAMED",
-            "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED",
             "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED",
-            "--add-opens=java.base/sun.nio.cs=ALL-UNNAMED",
-            "--add-opens=java.base/sun.security.action=ALL-UNNAMED",
             "--add-opens=java.base/sun.util.calendar=ALL-UNNAMED",
-        ]
+        ])
 
-        os.environ['PYSPARK_SUBMIT_ARGS'] = f'{" ".join(java_opts)} pyspark-shell'
-
-        self.spark = SparkSession.builder \
+        # Build Spark session with Java compatibility options
+        builder = SparkSession.builder \
             .appName(self.app_name) \
             .config("spark.sql.warehouse.dir", "/tmp/spark-warehouse") \
-            .config("spark.driver.memory", "2g") \
-            .config("spark.driver.extraJavaOptions", " ".join(java_opts)) \
-            .config("spark.executor.extraJavaOptions", " ".join(java_opts)) \
-            .getOrCreate()
+            .config("spark.driver.memory", "2g")
+
+        # Only add Java options if using Java 9+
+        # For Java 8, these options are not needed
+        try:
+            builder = builder \
+                .config("spark.driver.extraJavaOptions", java_opts) \
+                .config("spark.executor.extraJavaOptions", java_opts)
+        except Exception:
+            # If setting Java options fails, continue without them
+            pass
+
+        self.spark = builder.getOrCreate()
 
         # Set log level to reduce verbosity
         self.spark.sparkContext.setLogLevel("ERROR")
