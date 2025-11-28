@@ -39,7 +39,10 @@ A powerful command-line application to track income, expenses, and generate comp
 
 ### Prerequisites
 - Python 3.8 or higher
+- Java 11, 17 (LTS recommended), or 23 (with compatibility fixes included)
 - pip package manager
+
+**Note:** The application works with Java 23, but Java 17 LTS is recommended for best stability. See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for Java version issues.
 
 ### Setup
 
@@ -159,6 +162,31 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 
 This project is open source and available under the MIT License.
 
+## Troubleshooting
+
+### Java Version Issues
+
+If you encounter Java compatibility errors (especially with Java 23), the application includes compatibility fixes. However, for best results:
+
+**Recommended:** Use Java 17 LTS
+```bash
+# Check your Java version
+java -version
+
+# macOS: Install Java 17
+brew install openjdk@17
+export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+```
+
+See the complete [TROUBLESHOOTING.md](TROUBLESHOOTING.md) guide for:
+- Java version compatibility
+- PySpark installation issues
+- Memory configuration
+- Platform-specific problems
+- Common runtime errors
+
 ## Support
 
-For issues, questions, or suggestions, please open an issue on the repository.
+For issues, questions, or suggestions:
+1. Check [TROUBLESHOOTING.md](TROUBLESHOOTING.md) first
+2. Open an issue on the repository with your environment details
