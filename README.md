@@ -58,11 +58,10 @@ Access your finances through a beautiful, responsive web interface with:
 
 ### Prerequisites
 - Python 3.8 or higher
-- Java 11, 17 (LTS recommended), or 23 (with compatibility fixes included)
+- Java 11
 - pip package manager
 
-**Note:** The application works with Java 23, but Java 17 LTS is recommended for best stability. See [TROUBLESHOOTING.md](TROUBLESHOOTING.md) for Java version issues.
-
+**Note:** The application works with Java 11
 ### Setup
 
 1. Clone the repository:
@@ -91,7 +90,7 @@ Run the modern web interface:
 python app.py
 ```
 
-Then open your browser and navigate to: **http://localhost:5000**
+Then open your browser and navigate to: **http://localhost:5001**
 
 ### Command-Line Application
 
