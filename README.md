@@ -1,6 +1,15 @@
 # Personal Finance Tracker
 
-A powerful command-line application to track income, expenses, and generate comprehensive financial reports. Built with Apache Spark for efficient data processing and analysis.
+A modern web application and command-line tool to track income, expenses, and generate comprehensive financial reports. Built with Flask, Apache Spark, and Chart.js for powerful data processing and beautiful visualizations.
+
+## 🌐 New Web Interface Available!
+
+Access your finances through a beautiful, responsive web interface with:
+- **Interactive Dashboard** with real-time statistics
+- **Chart.js Visualizations** with dynamic, interactive charts
+- **Easy Transaction Management** with intuitive forms
+- **Responsive Design** that works on desktop and mobile
+- **Real-time Updates** without page refreshes
 
 ## Features
 
@@ -29,9 +38,19 @@ A powerful command-line application to track income, expenses, and generate comp
 
 ## Technical Stack
 
+### Backend
 - **Apache Spark (PySpark)**: Distributed data processing backend
+- **Flask**: Web framework for the web application
 - **Pandas**: Data manipulation and analysis
-- **Matplotlib**: Data visualization
+- **Matplotlib**: Data visualization (CLI)
+
+### Frontend (Web App)
+- **HTML5 & CSS3**: Modern, responsive UI
+- **JavaScript (ES6+)**: Interactive functionality
+- **Chart.js**: Interactive data visualizations
+- **Font Awesome**: Icon library
+
+### CLI Tools
 - **Colorama**: Colored terminal output
 - **Tabulate**: Beautiful table formatting
 
@@ -65,9 +84,18 @@ pip install -r requirements.txt
 
 ## Usage
 
-### Starting the Application
+### Web Application (Recommended)
 
-Run the main application:
+Run the modern web interface:
+```bash
+python app.py
+```
+
+Then open your browser and navigate to: **http://localhost:5000**
+
+### Command-Line Application
+
+Run the CLI version:
 ```bash
 python main.py
 ```
@@ -120,25 +148,53 @@ python main.py
 
 ```
 Personal-Finance-Tracker-/
-├── main.py                 # Application entry point
-├── requirements.txt        # Python dependencies
-├── README.md              # This file
-├── .gitignore            # Git ignore rules
+├── app.py                     # Web application entry point (Flask)
+├── main.py                    # CLI application entry point
+├── requirements.txt           # Python dependencies
+├── README.md                 # This file
+├── .gitignore               # Git ignore rules
 ├── src/
 │   ├── __init__.py
-│   ├── spark_backend.py      # Spark session and data operations
-│   ├── transaction_manager.py # Transaction CRUD operations
-│   ├── report_generator.py   # Report generation logic
-│   ├── csv_exporter.py       # CSV export functionality
-│   ├── visualizer.py         # Data visualization with matplotlib
-│   └── cli.py                # Command-line interface
-├── data/                  # Transaction data (created automatically)
-├── exports/               # CSV exports (created automatically)
-└── visualizations/        # Generated charts (created automatically)
+│   ├── spark_backend.py         # Spark session and data operations
+│   ├── transaction_manager.py   # Transaction CRUD operations
+│   ├── report_generator.py     # Report generation logic
+│   ├── csv_exporter.py         # CSV export functionality
+│   ├── visualizer.py           # Data visualization with matplotlib
+│   └── cli.py                  # Command-line interface
+├── templates/                # HTML templates for web app
+│   ├── base.html               # Base template
+│   ├── index.html              # Dashboard page
+│   ├── transactions.html       # Transactions page
+│   ├── reports.html            # Reports page
+│   ├── visualizations.html     # Visualizations page
+│   └── 404.html                # Error page
+├── static/                   # Static assets for web app
+│   ├── css/
+│   │   └── style.css           # Main stylesheet
+│   └── js/
+│       ├── main.js             # Common JavaScript utilities
+│       ├── dashboard.js        # Dashboard functionality
+│       ├── transactions.js     # Transactions page logic
+│       ├── reports.js          # Reports page logic
+│       └── visualizations.js   # Visualizations page logic
+├── data/                     # Transaction data (created automatically)
+├── exports/                  # CSV exports (created automatically)
+└── visualizations/           # Generated charts (created automatically)
 ```
 
 ## Example Workflow
 
+### Web Application
+1. **Start the web app**: `python app.py`
+2. **Open browser**: Navigate to `http://localhost:5000`
+3. **View dashboard**: See your financial overview with interactive charts
+4. **Add transactions**: Click "Add Income" or "Add Expense" on the dashboard
+5. **Manage transactions**: Go to Transactions page to view, filter, and delete
+6. **View reports**: Navigate to Reports for monthly/yearly summaries
+7. **Explore visualizations**: Check the Visualizations page for interactive charts
+8. **Export data**: Download your data as CSV from the Transactions page
+
+### CLI Application
 1. **Start the application**: `python main.py`
 2. **Add an income transaction**: Choose option 1, select "Income", choose "Salary", enter amount
 3. **Add expense transactions**: Choose option 1, select "Expense", choose category, enter amount
