@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Visualizations - Personal Finance Tracker{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1><i class="fas fa-chart-pie"></i> Data Visualizations</h1>
+    <p>Visual insights into your financial data</p>
+</div>
+
+<!-- Chart Grid -->
+<div class="charts-grid">
+    <!-- Income vs Expenses -->
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-chart-bar"></i> Income vs Expenses</h2>
+        </div>
+        <div class="card-body">
+            <canvas id="incomeExpenseChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Expense by Category -->
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-chart-pie"></i> Expenses by Category</h2>
+        </div>
+        <div class="card-body">
+            <canvas id="expensePieChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Monthly Trend -->
+    <div class="card full-width">
+        <div class="card-header">
+            <h2><i class="fas fa-chart-line"></i> Monthly Trend (Current Year)</h2>
+            <div class="chart-controls">
+                <select id="trend-year-select"></select>
+                <button class="btn btn-sm btn-primary" onclick="loadMonthlyTrend()">
+                    <i class="fas fa-sync"></i> Update
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <canvas id="monthlyTrendChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Top Expense Categories -->
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-list-ol"></i> Top Expense Categories</h2>
+        </div>
+        <div class="card-body">
+            <canvas id="topCategoriesChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Balance Overview -->
+    <div class="card">
+        <div class="card-header">
+            <h2><i class="fas fa-wallet"></i> Financial Overview</h2>
+        </div>
+        <div class="card-body">
+            <div class="balance-overview">
+                <div class="balance-item">
+                    <div class="balance-label">Total Income</div>
+                    <div class="balance-value income" id="viz-income">$0.00</div>
+                </div>
+                <div class="balance-item">
+                    <div class="balance-label">Total Expenses</div>
+                    <div class="balance-value expense" id="viz-expense">$0.00</div>
+                </div>
+                <div class="balance-item">
+                    <div class="balance-label">Net Balance</div>
+                    <div class="balance-value" id="viz-balance">$0.00</div>
+                </div>
+                <div class="balance-item">
+                    <div class="balance-label">Savings Rate</div>
+                    <div class="balance-value" id="viz-savings-rate">0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/visualizations.js') }}"></script>
+{% endblock %}
